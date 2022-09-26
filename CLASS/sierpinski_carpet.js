@@ -16,7 +16,12 @@ window.onload = function init() {
   }
 
   // 첫 사각형 네 점 지정
-  var vertices = [vec2(-1, 1), vec2(1, 1), vec2(-1, -1), vec2(1, -1)];
+  var vertices = [
+    vec2(-1, 1), 
+    vec2(1, 1), 
+    vec2(-1, -1), 
+    vec2(1, -1)
+  ];
 
   divideRectangle(
     vertices[0],
@@ -48,25 +53,20 @@ window.onload = function init() {
 
 function rectangle(a, b, c, d) {
   points.push(a, b, c, b, c, d);
-  //   points.push(a, b, c, d);
 }
-
-// function triangle(a, b, c) {
-//   points.push(a, b, c);
-// }
 
 function divideRectangle(a, b, c, d, count) {
   if (count === 0) {
     rectangle(a, b, c, d);
   } else {
-    var aab = mix(a, b, 0.33); // a,b의 삼등분점
-    var abb = mix(b, a, 0.33);
-    var aac = mix(a, c, 0.33);
-    var acc = mix(c, a, 0.33);
-    var ccd = mix(c, d, 0.33);
-    var cdd = mix(d, c, 0.33);
-    var bbd = mix(b, d, 0.33);
-    var bdd = mix(d, b, 0.33);
+    var aab = mix(a, b, 1/3); // a,b의 삼등분점 중 a에 가까운 점
+    var abb = mix(b, a, 1/3);
+    var aac = mix(a, c, 1/3);
+    var acc = mix(c, a, 1/3);
+    var ccd = mix(c, d, 1/3);
+    var cdd = mix(d, c, 1/3);
+    var bbd = mix(b, d, 1/3);
+    var bdd = mix(d, b, 1/3);
 
     --count;
 
